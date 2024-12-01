@@ -23,16 +23,15 @@ import random
 import re
 import textwrap
 import discord
+from enum import Enum
 from bot.roll import RollPhase, Roll, RollHistory, Roller
-
 
 class EmojiDiceConverter:
     """Converts dice rolls to and from emoji.
     
-    In the future, this class could be extended to support alternate dice
-    emoji sets.
+    Uses the specified dice set, defaulting to the outgunned dice set.
     """
-    DICE_EMOJI_MAP = {
+    DICE_EMOJI_MAP_NUMBERS = {
         1: ':one:',
         2: ':two:',
         3: ':three:',
@@ -40,13 +39,33 @@ class EmojiDiceConverter:
         5: ':five:',
         6: ':six:'
     }
-    EMOJI_DICE_MAP = {v: k for k, v in DICE_EMOJI_MAP.items()}
+
+    DICE_EMOJI_MAP_OUTGUNNED = {
+        1: '<:1outgunned:1312661394075816026>',
+        2: '<:2outgunned:1312661420399136809>',
+        3: '<:3outgunned:1312661431807901746>',
+        4: '<:4outgunned:1312661446806605824>',
+        5: '<:5outgunned:1312661455371505715>',
+        6: '<:6outgunned:1312661464963743754>'
+    }
+
+    class DiceSet(Enum):
+        OUTGUNNED = 'outgunned'
+        NUMBERS = 'numbers'
+
+    def __init__(self, dice_set=DiceSet.OUTGUNNED):
+        if dice_set == self.DiceSet.OUTGUNNED:
+            self.dice_emoji_map = self.DICE_EMOJI_MAP_OUTGUNNED
+        elif dice_set == self.DiceSet.NUMBERS:
+            self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
+        
+        self.emoji_dice_map = {v: k for k, v in self.dice_emoji_map.items()}
 
     def dice_to_emoji(self, dice):
-        return self.DICE_EMOJI_MAP.get(dice)
+        return self.dice_emoji_map.get(dice)
 
     def emoji_to_dice(self, emoji):
-        return self.EMOJI_DICE_MAP.get(emoji)
+        return self.emoji_dice_map.get(emoji)
 
 
 class RollPhaseMessageConverter:
@@ -125,9 +144,8 @@ class MessageGenerator:
     
     def generate_d6_message(self):
         """Generates a message containing the result of the d6 roll."""
-        # NB: Even if we later add other dice sets, we'll want to make sure to
-        #     use the regular number emojis (:one:, :two:, etc.) for d6 rolls.
-        return 'D6: ' + self.emoji_dice_converter.dice_to_emoji(random.randint(1, 6))
+        converter = EmojiDiceConverter(dice_set=EmojiDiceConverter.DiceSet.NUMBERS)
+        return 'D6: ' + converter.dice_to_emoji(random.randint(1, 6))
     
     def generate_help_message(self):
         """Generates a help message."""
@@ -171,10 +189,6 @@ class MessageParser:
                 break
             for roll_phase in [RollPhase.INITIAL, RollPhase.REROLL, RollPhase.FREE_REROLL, RollPhase.ALL_IN]:
                 self._parse_roll_line(line, roll_phase)
-        print("*** PARSED ROLL HISTORY ***")
-        print(self.roll_history)
-        print("*** MESSAGE ***")
-        print(message)
 
     def _parse_roll_line(self, line: str, roll_phase: RollPhase):
         """Parses a single line of the roll message."""
