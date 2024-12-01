@@ -5,8 +5,8 @@ including generating the view for the roll command with buttons for rerolling,
 free rerolling, and going all in.
 """
 import discord
-from message import MessageGenerator, MessageParser
-from roll import Roller
+from bot.message import MessageGenerator, MessageParser
+from bot.roll import Roller
 
 class RollController:
     """Handles roll commands for the Outgunned bot."""

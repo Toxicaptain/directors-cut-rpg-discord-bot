@@ -57,7 +57,7 @@ The bot is written in Python 3 and uses [Poetry](https://python-poetry.org/) for
    new commands are immediately registered on the server, without the normal up to one hour delay.
 4. Install Python 3 and Poetry according to the setup instructions for your respective system
 5. Run `poetry install` to install all dependencies
-6. Run `poetry run python bot.py` to start the bot
+6. Run `poetry run python -m bot.bot` to start the bot
 7. Generate an OAuth2 invite URL using the developer portal. Ensure that the `bot` scope and the
    `Send Messages` and `Manage Messages` bot permissions are checked.
 8. Open the URL in a browser and select a Discord server to invite the bot to it.

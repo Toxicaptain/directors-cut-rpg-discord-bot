@@ -23,7 +23,7 @@ import random
 import re
 import textwrap
 import discord
-from roll import RollPhase, Roll, RollHistory, Roller
+from bot.roll import RollPhase, Roll, RollHistory, Roller
 
 
 class EmojiDiceConverter:

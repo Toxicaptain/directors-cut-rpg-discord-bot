@@ -10,7 +10,7 @@ import os
 import discord
 from discord import app_commands
 
-from controller import (
+from bot.controller import (
     RollController,
     CoinController,
     D6Controller,

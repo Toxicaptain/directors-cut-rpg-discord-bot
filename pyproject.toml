@@ -6,6 +6,10 @@ authors = ["Mirko Froehlich <682+digitalhobbit@users.noreply.github.com>"]
 readme = "README.md"
 package-mode = false
 
+packages = [
+    { include = "bot" },
+]
+
 [tool.poetry.dependencies]
 python = "^3.12"
 "discord.py" = "^2.4.0"
