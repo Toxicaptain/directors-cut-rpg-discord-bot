@@ -1,9 +1,11 @@
 # Director's Cut RPG Discord Bot
-A Discord dice bot for tabletop RPGs using the Director's Cut system, such as Outgunned or Household.
+A Discord dice bot for tabletop RPGs using the Director's Cut system, such as Outgunned and Household.
 
 ## Usage
 
-The bot exposes several slash commands:
+Invite the bot to your Discord server by clicking on [this link](https://discord.com/oauth2/authorize?client_id=1312603605832040568&permissions=10240&integration_type=0&scope=bot).
+
+Once added, the bot exposes several slash commands:
 
 ### `/help`
 
