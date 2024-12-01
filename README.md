@@ -44,8 +44,9 @@ The following improvements are planned:
 
 ### Game-specific Dice Sets
 
-I plan to add support for the official Outgunned dice, and possibly Outgunned Adventure and Household dice as well.
-This would be purely a visual update; there are no mechanical differences between using these dice and regular d6.
+The bot currently defaults to the official Outgunned dice emojis. In the future, I may add support for alternative
+dice sets, such as Outgunned Adventure and Household dice. This would be purely a visual update; there are no
+mechanical differences between using these dice and regular d6.
 
 ## Development
 
