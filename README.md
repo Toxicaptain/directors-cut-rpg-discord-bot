@@ -28,6 +28,8 @@ the roll did not improve the result, which means that either a single success (i
 successes (in case of going _All In_) were lost. The lost
 successes are shown below.
 
+![Screenshot of the bot in action](screenshot.png)
+
 ### `/coin`
 
 Flips a coin. This can be used for Outgunned's spotlight coins, for example.
