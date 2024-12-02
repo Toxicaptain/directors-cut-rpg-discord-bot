@@ -24,6 +24,7 @@ import re
 import textwrap
 import discord
 from enum import Enum
+from bot.config import config
 from bot.roll import RollPhase, Roll, RollHistory, Roller
 
 class EmojiDiceConverter:
@@ -54,9 +55,11 @@ class EmojiDiceConverter:
         NUMBERS = 'numbers'
 
     def __init__(self, dice_set=DiceSet.OUTGUNNED):
-        if dice_set == self.DiceSet.OUTGUNNED:
+        # NB: In dev mode, we fall back to the numbers emojis, as the custom
+        #     Outgunned emojis are only defined in the production app.
+        if dice_set == self.DiceSet.OUTGUNNED and not config.dev_mode:            
             self.dice_emoji_map = self.DICE_EMOJI_MAP_OUTGUNNED
-        elif dice_set == self.DiceSet.NUMBERS:
+        else:
             self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
         
         self.emoji_dice_map = {v: k for k, v in self.dice_emoji_map.items()}
