@@ -181,12 +181,15 @@ class MessageParser:
 
     def __init__(self, interaction: discord.Interaction):
         self.roll_history = None
-        self._parse_roll_history(interaction.message.content)
+        self._parse_roll_history(interaction.message)
     
     def _parse_roll_history(self, message: str):
         """Parses the dice rolls from a message."""
         self.roll_history = RollHistory()
-        lines = message.split('\n')
+        if not message.embeds:
+            raise ValueError('Message does not contain an embed.')
+        embed = message.embeds[0]
+        lines = embed.description.split('\n')
         for line in lines:
             if line.startswith('---'):
                 break

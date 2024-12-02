@@ -8,6 +8,8 @@ import discord
 from bot.message import MessageGenerator, MessageParser
 from bot.roll import Roller
 
+EMBED_COLOR = discord.Color.gold()
+
 class RollController:
     """Handles roll commands for the Outgunned bot."""
     async def handle_roll(self, interaction: discord.Interaction, num_dice: int):
@@ -23,7 +25,9 @@ class RollController:
             can_reroll=roller.roll_history.can_reroll(),
             can_free_reroll=roller.roll_history.can_free_reroll(),
             can_go_all_in=roller.roll_history.can_go_all_in())
-        await interaction.response.send_message(MessageGenerator().generate_roll_message(roller.roll_history), view=view)    
+        content = MessageGenerator().generate_roll_message(roller.roll_history)
+        embed = discord.Embed(description=content, color=EMBED_COLOR)
+        await interaction.response.send_message(embed=embed, view=view)    
 
 
 class CoinController:
@@ -33,7 +37,8 @@ class CoinController:
 
         Responds with a message containing the result of the coin flip.
         """
-        await interaction.response.send_message(MessageGenerator().generate_coin_message())
+        embed = discord.Embed(description=MessageGenerator().generate_coin_message(), color=EMBED_COLOR)
+        await interaction.response.send_message(embed=embed)
 
 
 class D6Controller:
@@ -43,7 +48,8 @@ class D6Controller:
 
         Responds with a message containing the result of the d6 roll.
         """
-        await interaction.response.send_message(MessageGenerator().generate_d6_message())
+        embed = discord.Embed(description=MessageGenerator().generate_d6_message(), color=EMBED_COLOR)
+        await interaction.response.send_message(embed=embed)
 
 
 class HelpController:
@@ -53,7 +59,8 @@ class HelpController:
 
         Responds with a help message.
         """
-        await interaction.response.send_message(MessageGenerator().generate_help_message())
+        embed = discord.Embed(description=MessageGenerator().generate_help_message(), color=EMBED_COLOR)
+        await interaction.response.send_message(embed=embed)
 
 
 class RollView(discord.ui.View):
@@ -116,4 +123,5 @@ class RollView(discord.ui.View):
             can_go_all_in=roll_history.can_go_all_in())
 
         message = MessageGenerator().generate_roll_message(roll_history)
-        await interaction.response.edit_message(content=message, view=updated_view)
+        embed = discord.Embed(description=message, color=EMBED_COLOR)
+        await interaction.response.edit_message(embed=embed, view=updated_view)
