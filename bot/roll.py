@@ -79,11 +79,16 @@ class Roll:
         """Compares this roll to another roll and returns true if it is better.
         
         A roll is considered better if it either has more successes than the other
-        roll, or if it has the same number of successes, but at least one of the
-        successes is higher than the corresponding success in the other roll. We
-        can simplify this by checking if the number of matched dice is greater.
+        roll, or if it has higher magnitude successes. Note that 3 lower successes
+        are equivalent to 1 higher success, and vice versa.
         """
-        return len(self.matched_dice()) > len(other_roll.matched_dice())
+        # Iterate over both sets of matches. For each basic success (matches[2]), count it as 1.
+        # For each critical success (matches[3]), count it as 3. And so on (matches[4] = 9,
+        # matches[5] = 27, etc.). Then compare the total scores.
+        score = sum((3 ** (num_matches - 1)) * len(dice) for num_matches, dice in self.matches.items() if num_matches > 1)
+        other_score = sum((3 ** (num_matches - 1)) * len(dice) for num_matches, dice in other_roll.matches.items() if num_matches > 1)
+        print(f'{self} vs {other_roll}: {score} vs {other_score}')
+        return score > other_score
 
     def _group_matches(self):
         """Groups the dice by the number of matches.
