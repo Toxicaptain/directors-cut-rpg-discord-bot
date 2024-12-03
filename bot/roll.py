@@ -87,7 +87,6 @@ class Roll:
         # matches[5] = 27, etc.). Then compare the total scores.
         score = sum((3 ** (num_matches - 1)) * len(dice) for num_matches, dice in self.matches.items() if num_matches > 1)
         other_score = sum((3 ** (num_matches - 1)) * len(dice) for num_matches, dice in other_roll.matches.items() if num_matches > 1)
-        print(f'{self} vs {other_roll}: {score} vs {other_score}')
         return score > other_score
 
     def _group_matches(self):
