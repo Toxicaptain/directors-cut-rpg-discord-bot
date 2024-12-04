@@ -42,12 +42,22 @@ class EmojiDiceConverter:
     }
 
     DICE_EMOJI_MAP_OUTGUNNED = {
-        1: '<:1outgunned:1312661394075816026>',
-        2: '<:2outgunned:1312661420399136809>',
-        3: '<:3outgunned:1312661431807901746>',
-        4: '<:4outgunned:1312661446806605824>',
-        5: '<:5outgunned:1312661455371505715>',
-        6: '<:6outgunned:1312661464963743754>'
+        'dev' : {
+            1: '<:1outgunned:1313725926554734632>',
+            2: '<:2outgunned:1313725949682122774>',
+            3: '<:3outgunned:1313725961702866954>',
+            4: '<:4outgunned:1313725971873927189>',
+            5: '<:5outgunned:1313725981810360411>',
+            6: '<:6outgunned:1313725991092486174>'
+        },
+        'prod' : {
+            1: '<:1outgunned:1312661394075816026>',
+            2: '<:2outgunned:1312661420399136809>',
+            3: '<:3outgunned:1312661431807901746>',
+            4: '<:4outgunned:1312661446806605824>',
+            5: '<:5outgunned:1312661455371505715>',
+            6: '<:6outgunned:1312661464963743754>'
+        }
     }
 
     class DiceSet(Enum):
@@ -55,10 +65,9 @@ class EmojiDiceConverter:
         NUMBERS = 'numbers'
 
     def __init__(self, dice_set=DiceSet.OUTGUNNED):
-        # NB: In dev mode, we fall back to the numbers emojis, as the custom
-        #     Outgunned emojis are only defined in the production app.
-        if dice_set == self.DiceSet.OUTGUNNED and not config.dev_mode:            
-            self.dice_emoji_map = self.DICE_EMOJI_MAP_OUTGUNNED
+        env = 'dev' if config.dev_mode else 'prod'
+        if dice_set == self.DiceSet.OUTGUNNED:            
+            self.dice_emoji_map = self.DICE_EMOJI_MAP_OUTGUNNED[env]
         else:
             self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
         
