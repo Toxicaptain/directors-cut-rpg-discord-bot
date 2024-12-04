@@ -23,62 +23,8 @@ import random
 import re
 import textwrap
 import discord
-from enum import Enum
-from bot.config import config
-from bot.roll import RollPhase, Roll, RollHistory, Roller
-
-class EmojiDiceConverter:
-    """Converts dice rolls to and from emoji.
-    
-    Uses the specified dice set, defaulting to the outgunned dice set.
-    """
-    DICE_EMOJI_MAP_NUMBERS = {
-        1: ':one:',
-        2: ':two:',
-        3: ':three:',
-        4: ':four:',
-        5: ':five:',
-        6: ':six:'
-    }
-
-    DICE_EMOJI_MAP_OUTGUNNED = {
-        'dev' : {
-            1: '<:1outgunned:1313725926554734632>',
-            2: '<:2outgunned:1313725949682122774>',
-            3: '<:3outgunned:1313725961702866954>',
-            4: '<:4outgunned:1313725971873927189>',
-            5: '<:5outgunned:1313725981810360411>',
-            6: '<:6outgunned:1313725991092486174>'
-        },
-        'prod' : {
-            1: '<:1outgunned:1312661394075816026>',
-            2: '<:2outgunned:1312661420399136809>',
-            3: '<:3outgunned:1312661431807901746>',
-            4: '<:4outgunned:1312661446806605824>',
-            5: '<:5outgunned:1312661455371505715>',
-            6: '<:6outgunned:1312661464963743754>'
-        }
-    }
-
-    class DiceSet(Enum):
-        OUTGUNNED = 'outgunned'
-        NUMBERS = 'numbers'
-
-    def __init__(self, dice_set=DiceSet.OUTGUNNED):
-        env = 'dev' if config.dev_mode else 'prod'
-        if dice_set == self.DiceSet.OUTGUNNED:            
-            self.dice_emoji_map = self.DICE_EMOJI_MAP_OUTGUNNED[env]
-        else:
-            self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
-        
-        self.emoji_dice_map = {v: k for k, v in self.dice_emoji_map.items()}
-
-    def dice_to_emoji(self, dice):
-        return self.dice_emoji_map.get(dice)
-
-    def emoji_to_dice(self, emoji):
-        return self.emoji_dice_map.get(emoji)
-
+from bot.dice import DiceSet, EmojiDiceConverter
+from bot.roll import RollPhase, Roll, RollHistory
 
 class RollPhaseMessageConverter:
     """Converts roll phases to and from strings."""
@@ -103,7 +49,8 @@ class MessageGenerator:
     #     decided to keep them together for simplicity and because the roll
     #     message requires an OutgunnedRoller parameter, while the coin message
     #     doesn't.
-    emoji_dice_converter = EmojiDiceConverter()
+    def __init__(self, dice_set=DiceSet.OUTGUNNED):
+        self.emoji_dice_converter = EmojiDiceConverter(dice_set=dice_set)
 
     def generate_roll_message(self, roll_history: RollHistory):
         """Generates a message containing the result of the roll."""
@@ -156,7 +103,7 @@ class MessageGenerator:
     
     def generate_d6_message(self):
         """Generates a message containing the result of the d6 roll."""
-        converter = EmojiDiceConverter(dice_set=EmojiDiceConverter.DiceSet.NUMBERS)
+        converter = EmojiDiceConverter(dice_set=DiceSet.NUMBERS)
         return 'D6: ' + converter.dice_to_emoji(random.randint(1, 6))
     
     def generate_help_message(self):

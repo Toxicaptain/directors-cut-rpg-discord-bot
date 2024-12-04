@@ -5,10 +5,30 @@ including generating the view for the roll command with buttons for rerolling,
 free rerolling, and going all in.
 """
 import discord
+from bot.dice import DiceSet
 from bot.message import MessageGenerator, MessageParser
 from bot.roll import Roller
+from bot.channel_settings import channel_settings
 
 EMBED_COLOR = discord.Color.gold()
+
+class SettingsController:
+    """Handles the settings command for the Outgunned bot."""
+    async def handle_settings(self, interaction: discord.Interaction, dice_set_str: str):
+        """Handles the /settings Discord command.
+
+        Sets the dice set for the channel.
+        May be used to set additional settings in the future.
+
+        Args:
+            interaction: The Discord interaction.
+            dice_set_short: The short string representation of the dice set.
+        """
+        dice_set = DiceSet(dice_set_str)
+        channel_settings.set_dice_set(interaction.channel_id, dice_set)
+        embed = discord.Embed(description=f'Set the dice set to {dice_set.value}', color=EMBED_COLOR)
+        await interaction.response.send_message(embed=embed)
+
 
 class RollController:
     """Handles roll commands for the Outgunned bot."""
@@ -25,7 +45,10 @@ class RollController:
             can_reroll=roller.roll_history.can_reroll(),
             can_free_reroll=roller.roll_history.can_free_reroll(),
             can_go_all_in=roller.roll_history.can_go_all_in())
-        content = MessageGenerator().generate_roll_message(roller.roll_history)
+        dice_set = channel_settings.get_dice_set(interaction.channel_id)
+        print('Channel id:', interaction.channel_id)
+        print('Dice set:', dice_set)
+        content = MessageGenerator(dice_set).generate_roll_message(roller.roll_history)
         embed = discord.Embed(description=content, color=EMBED_COLOR)
         await interaction.response.send_message(embed=embed, view=view)    
 

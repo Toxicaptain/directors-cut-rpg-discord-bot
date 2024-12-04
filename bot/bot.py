@@ -3,18 +3,17 @@
 The code below is adapted from:
 https://github.com/Rapptz/discord.py/blob/master/examples/app_commands/basic.py
 """
-from typing import Optional
-import os
-
 import discord
 from discord import app_commands
 
 from bot.config import config
 from bot.controller import (
+    SettingsController,
     RollController,
     CoinController,
     D6Controller,
     HelpController)
+from bot.dice import DiceSet
 
 
 class MyClient(discord.Client):
@@ -44,6 +43,22 @@ def main():
     async def on_ready():
         print(f'Logged in as {client.user} (ID: {client.user.id})')
         print('------')
+
+    @client.tree.command()
+    @app_commands.describe(
+        dice_set='The dice set to use (Outgunned, Household, etc.)',
+    )
+    @app_commands.choices(
+        dice_set=[
+            app_commands.Choice(name='Numbers', value=DiceSet.NUMBERS.value),
+            app_commands.Choice(name='Outgunned', value=DiceSet.OUTGUNNED.value),
+            app_commands.Choice(name='Outgunned Adventure', value=DiceSet.OUTGUNNED_ADVENTURE.value),
+            app_commands.Choice(name='Household', value=DiceSet.HOUSEHOLD.value),
+        ]
+    )
+    async def settings(interaction: discord.Interaction, dice_set: str):
+        """Set the channel settings, such as the dice set."""
+        await SettingsController().handle_settings(interaction, dice_set)
 
     @client.tree.command()
     async def help(interaction: discord.Interaction):

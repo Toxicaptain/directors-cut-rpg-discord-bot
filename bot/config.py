@@ -21,4 +21,6 @@ class Config:
         self.dev_guild_id = os.getenv('DEV_GUILD_ID')
         self.dev_mode = bool(self.dev_guild_id)
 
+        self.channel_settings_db = os.getenv('CHANNEL_SETTINGS_DB', 'channel_settings.db')
+
 config = Config()
