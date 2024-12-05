@@ -38,15 +38,19 @@ Flips a coin. This can be used for Outgunned's spotlight coins, for example.
 
 Rolls a single d6. This can be used for Outgunned's death roulette, for example.
 
+### `/settings <dice_set>`
+
+Sets the dice set to use for the current channel. The following dice sets are currently supported:
+* Outgunned (default)
+* Outgunned Adventure
+* Household
+* Numbers
+
+The changes are purely visual, in the form of different dice emojis. There are no mechnical differences between the dice sets.
+
 ## Future Improvements
 
-The following improvements are planned:
-
-### Game-specific Dice Sets
-
-The bot currently defaults to the official Outgunned dice emojis. In the future, I may add support for alternative
-dice sets, such as Outgunned Adventure and Household dice. This would be purely a visual update; there are no
-mechanical differences between using these dice and regular d6.
+None currently planned. Please feel free to submit an issue with your feature request.
 
 ## Development
 
@@ -66,3 +70,10 @@ The bot is written in Python 3 and uses [Poetry](https://python-poetry.org/) for
 7. Generate an OAuth2 invite URL using the developer portal. Ensure that the `bot` scope and the
    `Send Messages` and `Manage Messages` bot permissions are checked.
 8. Open the URL in a browser and select a Discord server to invite the bot to it.
+
+## Changelog
+
+| Version | Description |
+|---------|-------------|
+| v0.1.0  | Initial release |
+| v0.2.0  | Added `/settings` command to change dice sets |

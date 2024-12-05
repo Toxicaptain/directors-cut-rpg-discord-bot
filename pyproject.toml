@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "directors-cut-rpg-discord-bot"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Discord dice bot for tabletop RPGs using the Director's Cut system, such as Outgunned or Household"
 authors = ["Mirko Froehlich <682+digitalhobbit@users.noreply.github.com>"]
 readme = "README.md"
