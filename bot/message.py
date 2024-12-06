@@ -136,9 +136,8 @@ class MessageParser:
         emoji_dice_converter: An EmojiDiceConverter instance.
         roll_history: The roll history.
     """
-    emoji_dice_converter = EmojiDiceConverter()
-
-    def __init__(self, interaction: discord.Interaction):
+    def __init__(self, interaction: discord.Interaction, dice_set=DiceSet.OUTGUNNED):
+        self.emoji_dice_converter = EmojiDiceConverter(dice_set=dice_set)
         self.roll_history = None
         self._parse_roll_history(interaction.message)
     
