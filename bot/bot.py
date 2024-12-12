@@ -12,7 +12,10 @@ from bot.controller import (
     RollController,
     CoinController,
     D6Controller,
-    HelpController)
+    HelpController,
+    DynamicRerollButton,
+    DynamicFreeRerollButton,
+    DynamicAllInButton,)
 from bot.dice import DiceSet
 
 
@@ -31,6 +34,8 @@ class MyClient(discord.Client):
         If a development guild is specified, the global commands are copied to that guild.
         This ensures that they are available right away, without the delay of up to an hour.
         """
+        # Register dynamic buttons, so they still work after the bot restarts.
+        self.add_dynamic_items(DynamicRerollButton, DynamicFreeRerollButton, DynamicAllInButton)
         if self.dev_guild:
             self.tree.copy_global_to(guild=self.dev_guild)
         await self.tree.sync(guild=self.dev_guild)
