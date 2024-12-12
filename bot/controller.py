@@ -99,7 +99,7 @@ class RollView(discord.ui.View):
     Contains buttons for rerolling, free rerolling, and going all in.
     """
     def __init__(self, can_reroll: bool, can_free_reroll: bool, can_go_all_in: bool):
-        super().__init__()
+        super().__init__(timeout=None)
         if can_reroll:
             self.add_item(self.RerollButton())
         if can_free_reroll:
@@ -157,4 +157,9 @@ class RollView(discord.ui.View):
 
         message = MessageGenerator(dice_set).generate_roll_message(roll_history)
         embed = discord.Embed(description=message, color=EMBED_COLOR)
-        await interaction.response.edit_message(embed=embed, view=updated_view)
+        try:
+            # await interaction.edit_original_response(embed=embed, view=updated_view)
+            # await interaction.message.edit(embed=embed, view=updated_view)
+            await interaction.response.edit_message(embed=embed, view=updated_view)
+        except Exception as e:
+            print(f"Failed to update message: {e}")

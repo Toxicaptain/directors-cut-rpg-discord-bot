@@ -26,7 +26,7 @@ class MyClient(discord.Client):
         print(f'Development guild: {self.dev_guild}')
 
     async def setup_hook(self):
-        """Setup the global comments on the guild.
+        """Setup the global commands on the guild.
         
         If a development guild is specified, the global commands are copied to that guild.
         This ensures that they are available right away, without the delay of up to an hour.
