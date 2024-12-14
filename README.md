@@ -45,6 +45,8 @@ Sets the dice set to use for the current channel. The following dice sets are cu
 * Outgunned Adventure
 * Household
 * Numbers
+* Color Symbols
+* Color Squares
 
 The changes are purely visual, in the form of different dice emojis. There are no mechnical differences between the dice sets.
 
