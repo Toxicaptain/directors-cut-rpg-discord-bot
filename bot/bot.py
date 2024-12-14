@@ -40,6 +40,12 @@ class MyClient(discord.Client):
             self.tree.copy_global_to(guild=self.dev_guild)
         await self.tree.sync(guild=self.dev_guild)
 
+def generate_dice_set_choices():
+    """Dynamically generate the dice set choices for the /settings command."""
+    return [
+        app_commands.Choice(name=dice_set.name.replace('_', ' ').title(), value=dice_set.value)
+        for dice_set in DiceSet
+    ]
 
 def main():
     client = MyClient(intents=discord.Intents.default())
@@ -54,12 +60,7 @@ def main():
         dice_set='The dice set to use (Outgunned, Household, etc.)',
     )
     @app_commands.choices(
-        dice_set=[
-            app_commands.Choice(name='Numbers', value=DiceSet.NUMBERS.value),
-            app_commands.Choice(name='Outgunned', value=DiceSet.OUTGUNNED.value),
-            app_commands.Choice(name='Outgunned Adventure', value=DiceSet.OUTGUNNED_ADVENTURE.value),
-            app_commands.Choice(name='Household', value=DiceSet.HOUSEHOLD.value),
-        ]
+        dice_set=generate_dice_set_choices(),
     )
     async def settings(interaction: discord.Interaction, dice_set: str):
         """Set the channel settings, such as the dice set."""

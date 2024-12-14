@@ -3,10 +3,12 @@ from enum import Enum
 from bot.config import config
 
 class DiceSet(Enum):
-    NUMBERS = 'numbers'
     OUTGUNNED = 'outgunned'
     OUTGUNNED_ADVENTURE = 'outgunned_adventure'
     HOUSEHOLD = 'household'
+    NUMBERS = 'numbers'
+    COLOR_SYMBOLS = 'color_symbols'
+    COLOR_SQUARES = 'color_squares'
 
 
 class EmojiDiceConverter:
@@ -21,6 +23,24 @@ class EmojiDiceConverter:
         4: ':four:',
         5: ':five:',
         6: ':six:'
+    }
+
+    DICE_EMOJI_MAP_COLOR_SYMBOLS = {
+        1: ':red_circle:',
+        2: ':green_square:',
+        3: ':large_blue_diamond:',
+        4: ':purple_heart:',
+        5: ':star:',
+        6: ':white_square_button:'
+    }
+
+    DICE_EMOJI_MAP_COLOR_SQUARES = {
+        1: ':red_square:',
+        2: ':green_square:',
+        3: ':blue_square:',
+        4: ':purple_square:',
+        5: ':yellow_square:',
+        6: ':brown_square:'
     }
 
     DICE_EMOJI_MAP_SPECIAL = {
@@ -83,6 +103,10 @@ class EmojiDiceConverter:
     def __init__(self, dice_set=DiceSet.OUTGUNNED):
         if dice_set == DiceSet.NUMBERS:
             self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
+        elif dice_set == DiceSet.COLOR_SYMBOLS:
+            self.dice_emoji_map = self.DICE_EMOJI_MAP_COLOR_SYMBOLS
+        elif dice_set == DiceSet.COLOR_SQUARES:
+            self.dice_emoji_map = self.DICE_EMOJI_MAP_COLOR_SQUARES
         else:
             # Since custom emoji are app specific, we need to use different emoji
             # ids for the development and production environments.
