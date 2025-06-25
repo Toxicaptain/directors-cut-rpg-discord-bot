@@ -80,3 +80,4 @@ The bot is written in Python 3 and uses [Poetry](https://python-poetry.org/) for
 | v0.1.0  | Initial release |
 | v0.2.0  | Added `/settings` command to change dice sets |
 | v0.3.0  | Removed button timeout; only let the original roller click on the re-roll buttons; ensure buttons still work after the bot restarts |
+| v0.4.0  | Added Sabacc dice set |
