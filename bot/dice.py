@@ -9,6 +9,7 @@ class DiceSet(Enum):
     NUMBERS = 'numbers'
     COLOR_SYMBOLS = 'color_symbols'
     COLOR_SQUARES = 'color_squares'
+    SABACC = 'sabacc'
 
 
 class EmojiDiceConverter:
@@ -96,6 +97,24 @@ class EmojiDiceConverter:
                 4: '<:4household:1314069281365033060>',
                 5: '<:5household:1314069295688585339>',
                 6: '<:6household:1314069305767366778>'
+            }
+        },
+        DiceSet.SABACC: {
+            'dev' : {
+                1: '<:1sabacc:1387263246444134472>',
+                2: '<:2sabacc:1387263388522119291>',
+                3: '<:3sabacc:1387263399959728218>',
+                4: '<:4sabacc:1387263411578212587>',
+                5: '<:5sabacc:1387263423754010624>',
+                6: '<:6sabacc:1387263433896099860>'
+            },
+            'prod' : {
+                1: '<:1sabacc:1387270421992308756>',
+                2: '<:2sabacc:1387270438010359941>',
+                3: '<:3sabacc:1387270457174134906>',
+                4: '<:4sabacc:1387270474135900273>',
+                5: '<:5sabacc:1387270487788228750>',
+                6: '<:6sabacc:1387270498555002922>'
             }
         }
     }
