@@ -3,9 +3,9 @@ from enum import Enum
 from bot.config import config
 
 class DiceSet(Enum):
-    OUTGUNNED = 'outgunned'
-    OUTGUNNED_ADVENTURE = 'outgunned_adventure'
-    HOUSEHOLD = 'household'
+    OCTANE = 'octane'
+    OCTANE_ADVENTURE = 'octane_adventure'
+    HOMESTEAD = 'homestead'
     NUMBERS = 'numbers'
     COLOR_SYMBOLS = 'color_symbols'
     COLOR_SQUARES = 'color_squares'
@@ -15,7 +15,7 @@ class DiceSet(Enum):
 class EmojiDiceConverter:
     """Converts dice rolls to and from emoji.
     
-    Uses the specified dice set, defaulting to the outgunned dice set.
+    Uses the specified dice set, defaulting to the octane dice set.
     """
     DICE_EMOJI_MAP_NUMBERS = {
         1: ':one:',
@@ -45,25 +45,25 @@ class EmojiDiceConverter:
     }
 
     DICE_EMOJI_MAP_SPECIAL = {
-        DiceSet.OUTGUNNED: {
+        DiceSet.OCTANE: {
             'dev' : {
-                1: '<:1outgunned:1313725926554734632>',
-                2: '<:2outgunned:1313725949682122774>',
-                3: '<:3outgunned:1313725961702866954>',
-                4: '<:4outgunned:1313725971873927189>',
-                5: '<:5outgunned:1313725981810360411>',
-                6: '<:6outgunned:1313725991092486174>'
+                1: '<:1octane:1313725926554734632>',
+                2: '<:2octane:1313725949682122774>',
+                3: '<:3octane:1313725961702866954>',
+                4: '<:4octane:1313725971873927189>',
+                5: '<:5octane:1313725981810360411>',
+                6: '<:6octane:1313725991092486174>'
             },
             'prod' : {
-                1: '<:1outgunned:1312661394075816026>',
-                2: '<:2outgunned:1312661420399136809>',
-                3: '<:3outgunned:1312661431807901746>',
-                4: '<:4outgunned:1312661446806605824>',
-                5: '<:5outgunned:1312661455371505715>',
-                6: '<:6outgunned:1312661464963743754>'
+                1: '<:1octane:1312661394075816026>',
+                2: '<:2octane:1312661420399136809>',
+                3: '<:3octane:1312661431807901746>',
+                4: '<:4octane:1312661446806605824>',
+                5: '<:5octane:1312661455371505715>',
+                6: '<:6octane:1312661464963743754>'
             }
         },
-        DiceSet.OUTGUNNED_ADVENTURE: {
+        DiceSet.OCTANE_ADVENTURE: {
             'dev' : {
                 1: '<:1oga:1313726032905506848>',
                 2: '<:2oga:1313726118725156884>',
@@ -81,22 +81,22 @@ class EmojiDiceConverter:
                 6: '<:6oga:1314069184216305675>'
             }
         },
-        DiceSet.HOUSEHOLD: {
+        DiceSet.HOMESTEAD: {
             'dev' : {
-                1: '<:1household:1313726193194766348>',
-                2: '<:2household:1313726205358374953>',
-                3: '<:3household:1313726215739277343>',
-                4: '<:4household:1313726225549889608>',
-                5: '<:5household:1313726235247116328>',
-                6: '<:6household:1313726246429134929>'
+                1: '<:1homestead:1313726193194766348>',
+                2: '<:2homestead:1313726205358374953>',
+                3: '<:3homestead:1313726215739277343>',
+                4: '<:4homestead:1313726225549889608>',
+                5: '<:5homestead:1313726235247116328>',
+                6: '<:6homestead:1313726246429134929>'
             },
             'prod' : {
-                1: '<:1household:1314069222648713256>',
-                2: '<:2household:1314069238432137257>',
-                3: '<:3household:1314069248074846208>',
-                4: '<:4household:1314069281365033060>',
-                5: '<:5household:1314069295688585339>',
-                6: '<:6household:1314069305767366778>'
+                1: '<:1homestead:1314069222648713256>',
+                2: '<:2homestead:1314069238432137257>',
+                3: '<:3homestead:1314069248074846208>',
+                4: '<:4homestead:1314069281365033060>',
+                5: '<:5homestead:1314069295688585339>',
+                6: '<:6homestead:1314069305767366778>'
             }
         },
         DiceSet.SABACC: {
@@ -119,7 +119,7 @@ class EmojiDiceConverter:
         }
     }
 
-    def __init__(self, dice_set=DiceSet.OUTGUNNED):
+    def __init__(self, dice_set=DiceSet.OCTANE):
         if dice_set == DiceSet.NUMBERS:
             self.dice_emoji_map = self.DICE_EMOJI_MAP_NUMBERS
         elif dice_set == DiceSet.COLOR_SYMBOLS:
