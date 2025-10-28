@@ -1,7 +1,7 @@
-"""The Outgunned bot message layer.
+"""The Octane bot message layer.
 
 This module contains classes for generating and parsing messages for the
-Outgunned bot. It also contains a class for converting dice rolls to and
+Octane bot. It also contains a class for converting dice rolls to and
 from emoji.
 
 The output will look something like this:
@@ -44,12 +44,12 @@ class RollPhaseMessageConverter:
 
 
 class MessageGenerator:
-    """Generates messages for the Outgunned bot."""
+    """Generates messages for the Octane bot."""
     # NB: We considered extracting each message type into its own class, but
     #     decided to keep them together for simplicity and because the roll
-    #     message requires an OutgunnedRoller parameter, while the coin message
+    #     message requires an OctaneRoller parameter, while the coin message
     #     doesn't.
-    def __init__(self, dice_set=DiceSet.OUTGUNNED):
+    def __init__(self, dice_set=DiceSet.OCTANE):
         self.emoji_dice_converter = EmojiDiceConverter(dice_set=dice_set)
 
     def generate_roll_message(self, roll_history: RollHistory):
@@ -117,7 +117,7 @@ class MessageGenerator:
                 `/roll <num_dice>`: Roll the specified number of dice.
                 `/coin`: Flip a coin.
                 `/d6`: Roll a d6.
-                `/settings <dice_set>`: Set the dice set (Outgunned, Household, etc.) for the current channel.
+                `/settings <dice_set>`: Set the dice set (Octane, Household, etc.) for the current channel.
 
             The `/roll` command automatically sorts the rolled dice and groups them by the number of matches. It also shows any applicable reroll buttons (Reroll, Free Reroll, All In).
 
@@ -136,7 +136,7 @@ class MessageParser:
         emoji_dice_converter: An EmojiDiceConverter instance.
         roll_history: The roll history.
     """
-    def __init__(self, interaction: discord.Interaction, dice_set=DiceSet.OUTGUNNED):
+    def __init__(self, interaction: discord.Interaction, dice_set=DiceSet.OCTANE):
         self.emoji_dice_converter = EmojiDiceConverter(dice_set=dice_set)
         self.roll_history = None
         self._parse_roll_history(interaction.message)
