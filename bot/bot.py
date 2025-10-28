@@ -1,4 +1,4 @@
-"""A Discord bot that rolls Outgunned dice.
+"""A Discord bot that rolls Octane dice.
 
 The code below is adapted from:
 https://github.com/Rapptz/discord.py/blob/master/examples/app_commands/basic.py
@@ -57,7 +57,7 @@ def main():
 
     @client.tree.command()
     @app_commands.describe(
-        dice_set='The dice set to use (Outgunned, Household, etc.)',
+        dice_set='The dice set to use (Octane, Homestead, etc.)',
     )
     @app_commands.choices(
         dice_set=generate_dice_set_choices(),
@@ -76,7 +76,7 @@ def main():
         dice='The number of dice to roll',
     )
     async def roll(interaction: discord.Interaction, dice: int):
-        """Roll a number of Outgunned dice."""
+        """Roll a number of Octane dice."""
         await RollController().handle_roll(interaction, dice)
 
     @client.tree.command()
