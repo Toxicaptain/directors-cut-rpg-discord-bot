@@ -1,7 +1,5 @@
 """A Discord bot that rolls Octane dice.
 
-The code below is adapted from:
-https://github.com/Rapptz/discord.py/blob/master/examples/app_commands/basic.py
 """
 import discord
 from discord import app_commands
