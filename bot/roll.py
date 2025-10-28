@@ -11,7 +11,7 @@ class RollPhase(Enum):
 
 
 class Roll:
-    """Encapsulates a single Outgunned dice roll.
+    """Encapsulates a single Octane dice roll.
     
     Attributes:
         dice: The sorted dice roll results.
@@ -92,7 +92,7 @@ class Roll:
     def _group_matches(self):
         """Groups the dice by the number of matches.
         
-        Outgunned is based on different numbers of matches, so we keep track of
+        Octane is based on different numbers of matches, so we keep track of
         these using a dictionary. The keys are the number of matches
         (e.g. 1, 2, 3, 4, 5, 6), and the values are lists of the dice that
         matched that number of times. They key 1 represents dice that did not
@@ -116,7 +116,7 @@ class Roll:
 
 
 class RollHistory:
-    """Encapsulates a complete Outgunned dice roll.
+    """Encapsulates a complete Octane dice roll.
     
     This includes the original roll, rerolls, and the final results.
 
@@ -194,14 +194,14 @@ class RollHistory:
 
 
 class Roller:
-    """Rolls Outgunned dice and encapsulates an entire roll including rerolls.
+    """Rolls Octane dice and encapsulates an entire roll including rerolls.
 
     Attributes:
         num_dice: The number of dice to roll.
         roll_history: The roll history.
     """
     def __init__(self, num_dice: int = 0, roll_history: RollHistory = None):
-        """Initializes the Outgunned roller.
+        """Initializes the Octane roller.
         
         Only one of the following parameters should be provided.
 
@@ -219,7 +219,7 @@ class Roller:
             raise ValueError('Either num_dice or roll_history must be provided.')
 
     def roll(self):
-        """Roll a number of Outgunned dice."""
+        """Roll a number of Octane dice."""
         roll = Roll(self.roll_dice(self.num_dice))
         self.roll_history.add_roll(RollPhase.INITIAL, roll)
 
