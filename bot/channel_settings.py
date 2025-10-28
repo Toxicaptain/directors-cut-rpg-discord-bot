@@ -20,9 +20,9 @@ class ChannelSettings:
             channel_id: The ID of the channel.
         
         Returns:
-            The dice set for the channel, defaulting to the Outgunned dice set.
+            The dice set for the channel, defaulting to the Octane dice set.
         """
-        return self.db.get(str(channel_id), DiceSet.OUTGUNNED)
+        return self.db.get(str(channel_id), DiceSet.OCTANE)
     
     def set_dice_set(self, channel_id: int, dice_set: DiceSet):
         """Set the dice set for the channel.
