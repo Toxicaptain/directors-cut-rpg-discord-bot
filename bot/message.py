@@ -117,7 +117,7 @@ class MessageGenerator:
                 `/roll <num_dice>`: Roll the specified number of dice.
                 `/coin`: Flip a coin.
                 `/d6`: Roll a d6.
-                `/settings <dice_set>`: Set the dice set (Octane, Household, etc.) for the current channel.
+                `/settings <dice_set>`: Set the dice set (Octane, Homestead, etc.) for the current channel.
 
             The `/roll` command automatically sorts the rolled dice and groups them by the number of matches. It also shows any applicable reroll buttons (Reroll, Free Reroll, All In).
 
