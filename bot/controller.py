@@ -1,6 +1,6 @@
-"""The Outgunned bot controller layer.
+"""The Octane bot controller layer.
 
-This module contains classes for handling commands for the Outgunned bot,
+This module contains classes for handling commands for the Octane bot,
 including generating the view for the roll command with buttons for rerolling,
 free rerolling, and going all in.
 """
@@ -23,7 +23,7 @@ def dice_set_for_interaction(interaction: discord.Interaction) -> DiceSet:
 
 
 class SettingsController:
-    """Handles the settings command for the Outgunned bot."""
+    """Handles the settings command for the Octane bot."""
     async def handle_settings(self, interaction: discord.Interaction, dice_set_str: str):
         """Handles the /settings Discord command.
 
@@ -41,7 +41,7 @@ class SettingsController:
 
 
 class RollController:
-    """Handles roll commands for the Outgunned bot."""
+    """Handles roll commands for the Octane bot."""
     async def handle_roll(self, interaction: discord.Interaction, num_dice: int):
         """Handles the /roll Discord command.
 
@@ -64,7 +64,7 @@ class RollController:
 
 
 class CoinController:
-    """Handles the coin commands for the Outgunned bot."""
+    """Handles the coin commands for the Octane bot."""
     async def handle_coin(self, interaction: discord.Interaction):
         """Handles the /coin Discord command.
 
@@ -75,7 +75,7 @@ class CoinController:
 
 
 class D6Controller:
-    """Handles the d6 command for the Outgunned bot."""
+    """Handles the d6 command for the Octane bot."""
     async def handle_d6(self, interaction: discord.Interaction):
         """Handles the /d6 Discord command.
 
@@ -86,7 +86,7 @@ class D6Controller:
 
 
 class HelpController:
-    """Handles help commands for the Outgunned bot."""
+    """Handles help commands for the Octane bot."""
     async def handle_help(self, interaction: discord.Interaction):
         """Handles the /help Discord command.
 
