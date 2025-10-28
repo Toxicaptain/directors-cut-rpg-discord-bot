@@ -120,9 +120,6 @@ class MessageGenerator:
                 `/settings <dice_set>`: Set the dice set (Octane, Homestead, etc.) for the current channel.
 
             The `/roll` command automatically sorts the rolled dice and groups them by the number of matches. It also shows any applicable reroll buttons (Reroll, Free Reroll, All In).
-
-            For more info, see the Github page:
-            https://github.com/digitalhobbit/directors-cut-rpg-discord-bot
             """
         )
 
